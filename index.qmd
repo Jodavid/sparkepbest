@@ -1,0 +1,2949 @@
+---
+title: "Explorando R e Python com Spark no contexto da Estatística"
+subtitle: "Dia 01 - 27.10.2025"
+author: "Prof. Dr. Jodavid Ferreira"
+institute: "UFPE"
+title-slide-attributes:
+  data-background-image: images/ml_background.png
+  data-background-size: contain
+  data-background-opacity: "0.2"
+format:
+  revealjs:
+    slide-number: c/t
+    css: ["css/jodavid.css"]
+    theme: default
+    footer: "Explorando R e Python com Spark no contexto da Estatística - [Jodavid Ferreira](https://jodavid.github.io/)"
+    logo: "images/logo.png"
+    smaller: true
+    incremental: false
+    transition: concave
+    background-transition: convex
+    chalkboard: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+
+## Estrutura do Minicurso
+
+<hr/>
+<br/>
+
+
+**=> Dia 01 - 27.01.2025**:
+
+- Introdução ao R;
+- Introdução ao python;
+- O que é Spark e instalação do Spark com Google Colab;
+
+<br/>
+
+**=> Dia 02 - 28.01.2025:**
+
+- Análise Exploratória de Dados com PySpark;
+- Análise Exploratória de Dados com Sparklyr;
+- Aplicando FPGroup em PySpark com criação de funções;
+- Aplicando FPGroup em Sparklyr com criação de funções;
+
+
+----
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<hr/>
+<h1 style="text-align:center;">Introdução ao python</h1>
+<hr/>
+
+
+----
+
+## R
+
+<hr/>
+
+<div class="contrib">
+
+O R é uma linguagem de programação inicialmente desenvolvida para computação estatística.
+E licenciada como *Software Livre.*
+</div>
+
+. . .
+
+<br/>
+
+- Atualmente, é uma linguagem de programação muito utilizada em estatística e ciência de dados, e é uma das linguagens mais populares para análise de dados.
+
+. . .
+
+- É uma implementação de código aberto do S, que é uma linguagem de programação estatística desenvolvida pela AT&T Bell Laboratories.
+
+. . .
+
+- As vantagens do R para programação estatística são a facilidade de uso, a capacidade de criar gráficos de alta qualidade e a comunidade de usuários ativos.
+
+---
+
+
+## Linguagem R
+
+<hr/>
+
+<br/>
+
+- Para obter o R, acesse o link: [https://cloud.r-project.org/](https://cloud.r-project.org/)
+
+- O CRAN (Comprehensive R Archive Network) é um conjunto de servidores-espelho distribuídos pelo mundo e é utilizado para distribuir o R e os pacotes do R.
+
+. . .
+
+- Uma *nova grande* versão do R é lançada uma  vez por ano, e há dois ou três pequenos lançamentos por ano.
+
+- É interessante manter o R sempre atualizado, pois as novas versões do R trazem melhorias de desempenho em relação aos hardware mais recentes, novas funcionalidades e correções de bugs.
+tware para o R.
+
+> No momento que essa aula foi criada, o R encontrava-se na versão `r unlist(strsplit(version$version.string," "))[3]`.
+
+---
+
+
+## Pacotes
+
+<hr/>
+
+<br/>
+
+- Para carregar um pacote no R, utilizamos uma das seguintes funções:
+
+
+```{r, echo=T, eval=T}
+# Exemplo de importação de pacotes
+library(tidyverse)
+```
+
+ou
+
+
+```{r, echo=T, eval=T}
+# Exemplo de importação de pacotes
+require(tidyverse)
+```
+
+. . .
+
+e as funções do pacote podem ser usadas de duas formas:
+
+```{r, echo=T, eval=T}
+# Exemplo de utilização de função de pacote
+iris |>
+  filter(Species == "setosa") |>
+  head()
+```
+
+
+---
+
+
+## Pacotes
+
+<hr/>
+
+ou 
+
+```{r, echo=T, eval=T}
+# Exemplo de utilização de função de pacote
+datasets::iris |>
+  dplyr::filter(Species == "setosa") |>
+  utils::head()
+```
+
+
+. . .
+
+vou colocar aqui abaixo novamente...
+
+. . .
+
+```{r, echo=T, eval=T}
+# Exemplo de utilização de função de pacote
+iris |>
+  filter(Species == "setosa") |>
+  head()
+```
+
+
+---
+
+## Operações Básicas
+
+<hr/>
+
+<br/>
+
+- O R é uma linguagem de programação que suporta operações aritméticas básicas, como adição, subtração, multiplicação e divisão.
+
+. . .
+
+```{r, echo=T, eval=T}
+# Exemplo de operações aritméticas
+1 + 1
+8 - 1
+10 * 2
+35 / 5
+```
+
+----
+
+
+## Criação de Objetos
+
+<hr/>
+
+<br/>
+
+- No R, é possível criar objetos para armazenar valores, e esses objetos podem ser de diferentes tipos, como números, strings, vetores, matrizes, data frames, entre outros.
+
+. . .
+
+- Criamos novos objetos utilizando o oprador de atribuição `<-` ou `=`, estes podem ser utilizados da seguinte forma:
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de objetos
+x <- 42/2
+y = 47
+1+1 -> z
+print(x)
+print(y)
+print(z)
+```
+
+
+
+----
+
+## Utilização de Funções
+
+<hr/>
+
+<br/>
+
+- O R possui uma série de funções embutidas que podem ser utilizadas para realizar operações matemáticas, estatísticas, de manipulação de dados, entre outras, estas função são utilizadas da seguinte forma:
+
+. . .
+
+```{r, echo=T, eval=T}
+# Exemplo de utilização de funções
+sqrt(16)
+log(2.71828)
+```
+
+. . .
+
+- Além disso, é possível criar funções personalizadas no R, e estas funções podem ser utilizadas da seguinte forma:
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de funções
+quadrado <- function(x) {
+  return(x^2)
+}
+
+saida <- quadrado(5)
+print(saida)
+```
+
+---
+
+
+## vetores, arrays, listas e matrizes
+
+<hr/>
+
+- No R, é possível criar vetores, arrays e listas, que são estruturas de dados que podem armazenar múltiplos valores.
+
+. . .
+
+- Um vetor é uma sequência de valores de um único tipo, e é criado utilizando a função `c()`.
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de vetores
+x <- c(1, 2, 3, 4, 5)
+
+print(x)
+```
+
+. . .
+
+- Um array é uma estrutura de dados que pode armazenar múltiplos valores de diferentes tipos, e é criado utilizando a função `array()`.
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de arrays
+y <- array(c(1, "a", TRUE), dim = c(3, 1))
+
+print(y)
+```
+
+---
+
+
+## vetores, arrays, listas e matrizes
+
+<hr/>
+
+- Uma lista é uma estrutura de dados que pode armazenar múltiplos valores de diferentes tipos, e é criado utilizando a função `list()`.
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de listas
+z <- list(1, "a", TRUE)
+
+print(z)
+
+```
+
+. . .
+
+- Também temos o conceito de Matrizes, que são vetores com dimensões, ou seja, são vetores que possuem linhas e colunas, e são criadas utilizando a função `matrix()`.
+
+```{r, echo=T, eval=T}
+# Exemplo de criação de matrizes
+m <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)
+
+print(m)
+```
+
+
+
+---
+
+
+## vetores, arrays, listas e matrizes
+
+<hr/>
+
+- Para acessar os elementos de estruturas como um vetor, array, lista ou matriz, utilizamos colchetes `[]`.
+
+. . .
+
+> Vale uma observação, de que os índices em R começam em 1, e não em 0, como em algumas outras linguagens de programação.
+
+. . .
+
+```{r, echo=T, eval=T}
+# Exemplo de acesso a elementos de vetores
+x <- c(1, 2, 3, 4, 5)
+
+print(x[1])
+print(x[3])
+```
+
+. . .
+
+```{r, echo=T, eval=T}
+# Exemplo de acesso a elementos de matrizes
+m <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, ncol = 3)
+
+print(m[1, 2])
+print(m[2, 3])
+```
+
+---
+
+## vetores, arrays, listas e matrizes
+
+<hr/>
+
+<div style="text-align: center;">
+![](images/1691441547592.png){.relative width="100%"}
+
+Fonte: https://www.linkedin.com/pulse/trabalhando-com-objetos-r-vetores-matrizes-data-frames-luz-lopes/
+</div>
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- O pacote `dplyr` é um pacote do R que fornece uma gramática para manipulação de dados, e é muito útil para transformar, filtrar e resumir dados.
+
+. . .
+
+- O `dplyr` fornece um conjunto de funções que são fáceis de usar e que permitem realizar operações comuns de manipulação de dados de forma eficiente, dessa forma, para essa parte inicial de tratamento de dados, vamos focar na utilização desse pacote.
+
+. . .
+
+- Vamos tentar sempre utilizar as funções da seguinte forma `pacote::funcao()` para evitar conflitos de funções com o mesmo nome em diferentes pacotes.
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+
+- Vamos selecionar uma base de dados para utilizar as funções do `dplyr`:
+
+```{r, echo=T, eval=T}
+dados <- nycflights13::flights
+
+dados |> 
+  head(13)
+```
+
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+Conseguimos fazer filtragem de dados utilizando a função `filter()`
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::filter(month == 11, day == 1) |> 
+  head(13)
+```
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+Para usar filtragens de forma eficaz, você precisa saber como utilizar operadores de comparação e operadores lógicos.
+
+. . .
+
+Alguns operadores são:
+
+- Operadores de comparação:
+  - `==` igual a
+  - `!=` diferente de
+  - `>` maior que
+  - `<` menor que
+
+. . .
+
+![](images/operadores_logicos.jpg){.absolute style="margin: -300px 0 0 500px;"}
+
+- Operadores lógicos:
+  - `&` e 
+  - `|` ou
+  - `!` não
+  
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- Neste caso, podemos utilizar
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::filter(month == 11 & day == 1) |> 
+  head(5)
+```
+
+. . .
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::filter(!(month != 11 | day != 1)) |> 
+  head(5)
+```
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- Um problema que pode surgir para complicar as comparações, são os valores faltantes.
+- Os *NAs* ("not available", em português, "não disponível") são valores que não existem na base de dados.
+- Qualquer operação envolvendo um valor desconhecido, também será desconhecida.
+
+. . .
+
+```{r, echo=T, eval=T}
+NA > 5
+10 == NA
+NA + 10
+NA == NA
+```
+
+. . . 
+
+- Para verificar se um valor é faltante, pode utilizar a função `is.na()`.
+
+```{r, echo=T, eval=T}
+is.na(NA)
+is.na(10)
+```
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+
+- A função `filter()` só considera as linhas em que a condição é verdadeira (`TRUE`), e descarta as linhas em que a condição é falsa (`FALSE`) ou `NA`. Se deseja preservar os valores faltantes, peça eles explicitamente:
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::filter(is.na(dep_time)) |> 
+  head(10)
+```
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- A função `select()` é utilizada para selecionar colunas de um data frame.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::select(year, month, day) |> 
+  head(15)
+```
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- É possível excluir colunas também utilizando o `select()`.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::select(-year, -month, -day) |> 
+  head(15)
+```
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- Existe também a função `summarise()`, que é utilizada para resumir os dados.
+- A função `summarise()` é muito útil para resumir os dados e obter estatísticas descritivas.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::summarise(mean_distance = mean(distance), 
+                   mean_air_time = mean(air_time)) 
+```
+
+. . .
+
+- Observe que para a variável `air_time` o resultado foi `NA`, isso ocorreu porque a função `mean()` não sabe o que fazer com valores faltantes. Nesse caso, devemos passar como argumento para remover os valores faltantes.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::summarise(mean_distance = mean(distance), 
+                   mean_air_time = mean(air_time, na.rm = TRUE)) 
+```
+
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+
+- A função `group_by()` é utilizada para agrupar os dados por uma ou mais variáveis.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::group_by(month) |> 
+  dplyr::summarise(mean_distance = mean(distance), 
+                   mean_air_time = mean(air_time, na.rm = TRUE)) 
+```
+
+
+---
+
+
+## Manipulação de dados com dplyr
+
+<hr/>
+
+- Contagens também é uma operação muito comum, e para isso, utilizamos a função `n()`.
+
+```{r, echo=T, eval=T}
+dados |> 
+  dplyr::group_by(month) |> 
+  dplyr::summarise(n = n())
+```
+
+
+
+
+---
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<hr/>
+<h1 style="text-align:center;">Introdução ao python</h1>
+<hr/>
+
+-------
+
+
+## Módulos ou bibliotecas
+
+<hr/>
+
+
+* As instalações de bibliotecas em python são realizadas utilizando o comando  pip, ou seja, utilizamos o comando `pip install nome_da_biblioteca`.
+
+
+Por exemplo, para instalar a biblioteca pandas, utilizamos o comando:
+
+
+```{R eval=T, echo=F}
+library(reticulate)
+use_condaenv("base", required = TRUE)
+#reticulate::use_condaenv("base", required = TRUE)
+```
+
+
+```{python eval=F, echo=T}
+pip install pandas
+```
+
+E podemos verificar se a instalação foi bem sucessida, utilizando:
+
+```{bash eval=T, echo=T}
+pip show pandas
+```
+
+------------------------------------------------------------------------
+
+## Módulos
+
+<hr/>
+
+* Também conhecidos como bibliotecas, os módulos são arquivos que contém funções, variáveis e classes que podem ser utilizadas em outros programas.
+
+* Para utilizar um módulo em python, utilizamos o comando `import nome_do_modulo`. Caso deseje utilizar apenas uma função específica de um módulo, utilizamos o comando `from nome_do_modulo import nome_da_funcao`.
+
+* Como por exemplo, utilizando o modulo `math`:
+
+```{python, echo=T, eval=T}
+# Exemplo de importação de módulo
+import math
+math.sqrt(25)
+```
+
+Acima o `math` é o módulo e `sqrt` é a função que calcula a raiz quadrada de um número.
+
+------------------------------------------------------------------------
+
+## Módulos
+
+<hr/>
+
+* Em python é comum utilizarmos a abreviação de um módulo, para facilitar a utilização de suas funções. Por exemplo, o módulo `pandas` é comumente abreviado como `pd`, o módulo `numpy` é abreviado como `np`, o módulo `matplotlib` é abreviado como `plt`, entre outros.
+
+> Vale uma observação é que essas abreviações elas são abraçadas pela comunidade, ou seja, não é uma regra, mas existe uma boa prática de por exemplo, abreviar o pandas como pd, o numpy como np, o matplotlib como plt, e existe isso para várias outras bibliotecas.
+
+------------------------------------------------------------------------
+
+## Módulos
+
+<hr/>
+
+
+Também existe o caso de você explicitar as funções que desejas nos módulos, com o intuito de usar diretamente o nome da função, sem a necessidade de chamar o módulo. Por exemplo, ao invés de utilizar `math.sqrt(25)`, você pode utilizar `from math import sqrt` e depois utilizar `sqrt(25)`.
+
+```{python eval=T, echo=T}
+# Exemplo de importação de função
+from math import sqrt
+sqrt(25)
+```
+
+> Note que a função `sqrt` foi importada diretamente do módulo `math`, e por isso não é necessário chamar o módulo para utilizá-la, ou seja, se a função não for utilizada como na forma acima, e utilizar o `import math` é necessário utilizar o `math.sqrt(25)` para obter o resultado, informando que a função `sqrt` pertence ao módulo `math`.
+
+------------------------------------------------------------------------
+
+## Módulos
+
+<hr/>
+
+* O python também permite que você utilize um apelido para a função importada, por exemplo, ao invés de utilizar `from math import sqrt`, você pode utilizar `from math import sqrt as raiz_quadrada`, e depois utilizar `raiz_quadrada(25)` para obter o resultado. Isso é útil quando a função importada possui um nome muito grande, ou quando o nome da função importada é muito comum e pode gerar confusão com outras funções. Então, um exemplo para esse caso é:
+
+```{python eval=T, echo=T}
+# Exemplo de importação de função com apelido
+from math import sqrt as raiz_quadrada
+raiz_quadrada(25)
+
+```
+
+
+
+------------------------------------------------------------------------
+
+## Laços e Condicionais
+
+<hr/>
+
+::: {style="text-align: center;"}
+![](images/do_for.jpeg){style="text-align: center; width: 70%; height: auto;"}
+:::
+
+
+------------------------------------------------------------------------
+
+## Laços e Condicionais
+
+<hr/>
+
+* Muitas linguagens usam chaves para delimitar blocos de código, mas em Python, a indentação é usada para isso. A indentação é uma parte importante da linguagem Python e, muitas vezes, é uma fonte de erros para os programadores que estão começando a aprender a linguagem.
+
+```{python eval=T, echo=T}
+# Exemplo de condicional
+x = 10
+if x > 5:
+    print("x é maior que 5")
+else:
+    print("x é menor ou igual a 5")
+```
+
+* Como é possível observar acima, o bloco de código que está dentro do `if` e do `else` está indentado, ou seja, está com um espaço a mais em relação ao bloco de código que está fora do `if` e do `else`. Isso é necessário para que o python entenda que o bloco de código está dentro do `if` e do `else`.
+
+------------------------------------------------------------------------
+
+## Laços e Condicionais
+
+<hr/>
+
+Quando o laço é utilizando `for` e `while`, a indentação também é necessária para delimitar o bloco de código que está dentro do laço.
+
+```{python eval=T, echo=T}
+# Exemplo de laço for
+for i in range(5):
+    print(i)
+```
+
+```{python eval=F, echo=T}
+# Exemplo de laço while
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+```
+
+> Uma observação importante, é que diferente da linguagem `R` o python inicia sua indexação em 0, ou seja, o primeiro elemento de uma lista, por exemplo, é o elemento 0, o segundo elemento é o elemento 1, e assim por diante. No `R` a indexação inicia em 1.
+
+
+------------------------------------------------------------------------
+
+## Laços Complexos
+
+<hr/>
+
+
+* Em python, se você possui uma lista, é possível acessar os elementos da lista diretamente da iteração no laço `for`. Isso é muito útil quando você deseja acessar o índice e o valor de um elemento da lista.
+
+```{python eval=F, echo=T}
+# Exemplo de laço for com acesso ao índice e ao valor
+lista = [10, 20, 30, 40, 50,  60, 70, 80, 90, 100]
+for i in lista:
+    print(i)
+```
+
+
+------------------------------------------------------------------------
+
+## Laços Complexos
+
+<hr/>
+
+
+* Em python, se você possui uma lista, é possível acessar os elementos da lista diretamente da iteração no laço `for`. Isso é muito útil quando você deseja acessar o índice e o valor de um elemento da lista.
+
+```{python eval=T, echo=T}
+# Exemplo de laço for com acesso ao índice e ao valor
+lista = [10, 20, 30, 40, 50,  60, 70, 80, 90, 100]
+for i in lista:
+    print(i)
+```
+
+
+------------------------------------------------------------------------
+
+## Laços Complexos
+
+<hr/>
+
+
+* Uma forma mais complexa é utilizando a função `enumerate` para acessar o índice e o valor de um elemento da lista.
+
+```{python eval=T, echo=T}
+# Exemplo de laço for com acesso ao índice e ao valor
+lista = [10, 20, 30, 40, 50]
+for i, valor in enumerate(lista):
+    print(f"O elemento {i} da lista é {valor}")
+
+```
+
+* Mas vamos avançando aos poucos, e vamos ver como podemos criar funções em python.
+
+
+------------------------------------------------------------------------
+
+## Funções
+
+<hr/>
+
+Em python, as funções são criadas utilizando a palavra-chave `def`, seguida pelo nome da função, seguida por parênteses, seguida por dois pontos. O bloco de código que está dentro da função é indentado, ou seja, está com um espaço a mais em relação ao bloco de código que está fora da função.
+
+```{python eval=T, echo=T}
+# Exemplo de função
+def minha_funcao():
+    print("Olá, mundo!")
+```
+
+Para chamar a função, basta utilizar o nome da função seguido por parênteses.
+
+```{python eval=T, echo=T}
+# Chamando a função
+minha_funcao()
+
+```   
+Como boas práticas de programação, é interessante que as funções possuam argumentos e docstring, ou seja, parâmetros que são passados para a função e dentro da função um cabeçalho indicando o que cada argumento representa, respectivamente. Isso torna a função mais flexível e mais útil.
+
+
+------------------------------------------------------------------------
+
+## Funções
+
+<hr/>
+
+
+Um exemplo de função com argumentos e docstring é:
+
+```{python eval=T, echo=T}
+# Exemplo de função com argumentos e docstring
+def saudacao(nome, saudacao="Olá"):
+    """
+    Função para saudar alguém
+    Argumentos:
+    nome: str, nome da pessoa a ser saudada
+    saudacao: str, saudação a ser utilizada
+    """
+    print(f"{saudacao}, {nome}!")
+```   
+
+No exemplo acima, a função `saudacao` possui dois argumentos, `nome` e `saudacao`, onde `nome` é obrigatório e `saudacao` é opcional, pois possui um valor padrão. Além disso, a função possui um cabeçalho que indica o que cada argumento representa.
+
+
+------------------------------------------------------------------------
+
+## Strings
+
+<hr/>
+
+As strings podem ser demilitadas por aspas simples ou duplas, e podem ser acessadas como listas, ou seja, é possível acessar cada caractere da string utilizando a indexação.
+
+```{python eval=T, echo=T}
+# Exemplo de string
+single_quoted_string = 'data science'
+double_quoted_string = "data science"
+single_quoted_string == double_quoted_string
+```
+
+O python usa barra invertida para codificar caracteres especiais. Por exemplo, para incluir uma aspa simples em uma string delimitada por aspas simples, você deve usar `\'`.
+
+```{python eval=T, echo=T}
+# Exemplo de string com aspas simples
+tab_string = "\t" # representa o caractere de tabulação
+len(tab_string)
+```
+
+
+------------------------------------------------------------------------
+
+## Strings
+
+<hr/>
+
+
+Também é possível criar strings múltiplas linhas utilizando três aspas simples ou duplas.
+
+```{python eval=T, echo=T}
+# Exemplo de string com múltiplas linhas
+multi_line_string = """Esta é a primeira linha.
+e esta é a segunda linha
+e esta é a terceira linha"""
+print(multi_line_string)
+```
+
+
+O python também possui uma série de funções para manipular strings, como por exemplo, a função `split` que divide uma string em uma lista de substrings.
+
+```{python eval=T, echo=T}
+# Exemplo de função split
+s = "Olá, mundo!"
+s.split()
+```
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+As listas são uma das estruturas de dados mais importantes do python. Elas são similares aos **vetores** em outras linguagens, como por exemplo na linguagem `R`^[No `R`,tipos diferentes no vetor ele converte para `character`, por exemplo `vetor <-c("a",1,TRUE)`, entretanto, são mais flexíveis.
+Elas são mais flexíveis, pois podem armazenar qualquer tipo de dado, e não são limitadas a um único tipo de dado.
+
+```{python eval=T, echo=T}
+# Exemplo de lista
+integer_list = [1, 2, 3]
+heterogeneous_list = ["string", 0.1, True]
+list_of_lists = [integer_list, heterogeneous_list, []]
+list_length = len(integer_list)
+list_sum = sum(integer_list)
+
+print(integer_list)
+print(heterogeneous_list)
+print(list_of_lists)
+print(list_length)
+print(list_sum)
+
+```
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+
+Você pode acessar ou modificar o `i-ésimo` elemento de uma lista utilizando colchetes.
+
+```{python eval=T, echo=T}
+# Exemplo de acesso a elementos de uma lista
+x = list(range(10))
+zero = x[0]
+one = x[1]
+nine = x[-1]
+eight = x[-2]
+x[0] = -1
+```
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+
+Além disso, o python possui uma sintaxe de corte que permite acessar múltiplos elementos de uma lista.
+
+```{python eval=T, echo=T}
+# Exemplo de corte de lista
+first_three = x[:3]
+three_to_end = x[3:]
+one_to_four = x[1:5]
+last_three = x[-3:]
+without_first_and_last = x[1:-1]
+copy_of_x = x[:]
+
+print(first_three)
+print(three_to_end)
+print(one_to_four)
+print(last_three)
+print(without_first_and_last)
+print(copy_of_x)
+
+```
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+Um operação interessante é utilizando o operator `in` para verificar se um elemento está contido em uma lista.
+
+```{python eval=T, echo=T}
+# Exemplo de operador in
+1 in [1, 2, 3]
+0 in [1, 2, 3]
+
+```
+
+**OBS.: Essa operação é muito mais lenta em listas do que em dicionários e conjuntos, pois o python faz uma busca linear em listas, ou seja, verifica os elementos da lista um de cadas vez, sendo assim a verificação em um conjunto ou dicionário é muito rápido. Vamos estudar consjuntos e dicionários mais a frente.**
+
+Com listas, também podemos concatenar, ou seja, adicionar mais informações a lista, e isso pode ser feito de várias formas, como adição de elementos a lista, junção de várias listas, ou multiplicação de listas. Abaixo segue exemplos de como fazer isso.
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+
+```{python eval=T, echo=T}
+# Exemplo de concatenação de listas
+x = [1, 2, 3]
+x.extend([4, 5, 6])
+print(x)
+```
+
+```{python eval=T, echo=T}
+# Exemplo de concatenação de listas
+x = [1, 2, 3]
+y = x + [4, 5, 6]
+print(y)
+```
+
+```{python eval=T, echo=T}
+# Exemplo de concatenação de elementos a lista
+x = [1, 2, 3]
+x.append(0)
+y = x[-1]
+z = len(x)
+print(x)
+print(y)
+print(z)
+```
+
+------------------------------------------------------------------------
+
+## Listas
+
+<hr/>
+
+
+```{python eval=T, echo=T}
+# Exemplo de junção de listas
+x, y = [1, 2], [3, 4]
+z = x + y
+print(z)
+```
+
+```{python eval=T, echo=T}
+# Exemplo de multiplicação de listas
+x = [1, 2] * 3
+print(x)
+```
+
+
+
+------------------------------------------------------------------------
+
+## Tuplas
+
+<hr/>
+
+
+Chegamos a Tuplas, e o que seria isso? Tuplas são muito parecidas com listas, mas com uma diferença fundamental, elas são **imutáveis**, ou seja, uma vez que você cria uma tupla, você não pode adicionar, remover ou modificar elementos dela. Tuplas são geralmente utilizadas para funções que retornam múltiplos valores. Vamos a exemplos:
+
+```{python eval=T, echo=T}
+# Exemplo de tuplas
+my_list = [1, 2]
+my_tuple = (1, 2)
+other_tuple = 3, 4
+my_list[1] = 3
+try:
+    my_tuple[1] = 3
+except TypeError:
+    print("Não é possível modificar uma tupla")
+```
+ 
+------------------------------------------------------------------------
+
+## Tuplas
+
+<hr/>
+
+
+Um outro exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de tuplas
+def sum_and_product(x, y):
+    return (x + y), (x * y)
+  
+sp = sum_and_product(2, 3)
+s, p = sum_and_product(5, 10)
+print(sp)
+print(s)
+print(p)
+
+```
+
+
+
+As tuplas (e listas) podem ser usadas para atribuições múltiplas, o que é muito útil para trocar valores de variáveis.
+
+```{python eval=T, echo=T}
+# Exemplo de atribuição múltipla
+x, y = 1, 2
+x, y = y, x
+print(x)
+print(y)
+
+```
+
+------------------------------------------------------------------------
+
+## Dicionários
+
+<hr/>
+
+Outra estrutura fundamental é o dicionário, que é uma coleção de pares chave-valor, onde as chaves devem ser únicas. Dicionários são como **listas**, mas mais gerais, pois você pode indexá-los com **qualquer tipo imutável**, não apenas inteiros. Vamos a exemplos:
+
+```{python eval=T, echo=T}
+# Exemplo de dicionários
+empty_dict = {}
+empty_dict2 = dict()
+grades = {"Joel": 80, "Tim": 95}
+joels_grade = grades["Joel"]
+print(empty_dict)
+print(empty_dict2)
+print(grades)
+print(joels_grade)
+
+```
+
+------------------------------------------------------------------------
+
+## Dicionários
+
+<hr/>
+
+```{python eval=T, echo=T}
+# Exemplo de operador in
+joel_has_grade = "Joel" in grades
+kate_has_grade = "Kate" in grades
+print(joel_has_grade)
+print(kate_has_grade)
+
+```
+
+```{python eval=T, echo=T}
+# Exemplo de get
+joels_grade = grades.get("Joel", 0)
+kates_grade = grades.get("Kate", 0)
+no_ones_grade = grades.get("No One")
+print(joels_grade)
+print(kates_grade)
+print(no_ones_grade)
+
+```
+
+------------------------------------------------------------------------
+
+## Dicionários
+
+<hr/>
+
+```{python eval=T, echo=T}
+# Exemplo de atribuição de valores
+grades["Tim"] = 99
+grades["Kate"] = 100
+num_students = len(grades)
+print(grades)
+print(num_students)
+
+
+```
+
+Dicionários são muito utilizados para contadores, ou seja, para contar a frequência de ocorrência de elementos em uma lista. Vamos a um exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de contadores
+document = ["data", "science", "from", "scratch", "data", "science", "data"]
+word_counts = {}
+for word in document:
+    if word in word_counts:
+        word_counts[word] += 1
+    else:
+        word_counts[word] = 1
+print(word_counts)
+
+```
+
+------------------------------------------------------------------------
+
+## Dicionários
+
+<hr/>
+
+Frequentemente usamos dicionários para representar dados "semi-estruturados". Por exemplo, poderíamos ter um dicionário por usuário em uma rede social, onde as chaves são os nomes das colunas e os valores são os dados do usuário. Por exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de dicionários semi-estruturados
+tweet = {
+    "user" : "joelgrus",
+    "text" : "Data Science.",
+    "retweet_count" : 100,
+    "hashtags" : ["#data", "#science", "#datascience", "#bigdata"]
+}
+print(tweet)
+```
+
+
+------------------------------------------------------------------------
+
+## Dicionários
+
+<hr/>
+
+Além de procurar por chaves específicas, podemos olhar para todas elas. Por exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de chaves e valores
+tweet_keys = tweet.keys()
+tweet_values = tweet.values()
+tweet_items = tweet.items()
+print(tweet_keys)
+print(tweet_values)
+print(tweet_items)
+
+```
+
+
+As chaves dos dicionários devem ser imutáveis, o que significa que podemos usar strings, números ou tuplas como chaves, mas não listas. Por exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de chaves imutáveis
+#bad idea
+#bad_dict = {[1, 2, 3]: "one two three"}
+#good idea
+good_dict = {(1, 2, 3): "one two three"}
+print(good_dict)
+
+```
+
+
+
+
+------------------------------------------------------------------------
+
+## Conjuntos
+
+<hr/>
+
+Conjuntos são uma outra estrutura de dados em Python. Um conjunto é uma coleção de elementos distintos, ou seja, não há repetição de elementos.
+Os conjuntos em `python` são similares aos conjuntos em `matemática` e utilizam a função `set()` para criá-los.
+Vamos a exemplos:
+
+```{python eval=T, echo=T}
+# Exemplo de conjuntos
+s = set()
+s.add(1)
+s.add(2)
+s.add(2)
+x = len(s)
+y = 2 in s
+z = 3 in s
+print(s)
+print(x)
+print(y)
+print(z)
+
+```
+
+------------------------------------------------------------------------
+
+## Conjuntos
+
+<hr/>
+
+Conjuntos são muito úteis para verificar a existência de elementos distintos em uma coleção^[O que seria uma coleção? O que seria uma coleção? Uma coleção é um tipo de dado que armazena outros tipos de dados, ou seja, é uma estrutura de dados que contém um conjunto de elementos.]. Por exemplo, podemos verificar a existência de palavras distintas em um texto. Vamos a um exemplo:
+
+```{python eval=T, echo=T}
+# Exemplo de palavras distintas
+text = "data science from scratch data science data"
+words = text.split()
+word_set = set(words)
+print(words)
+print(word_set)
+
+```
+
+
+----
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<hr/>
+<h1 style="text-align:center;">Introdução ao SPARK</h1>
+<hr/>
+
+
+
+-------
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+- Estamos em um período de
+transformação no modo em
+que estudamos, ensinamos e, principalmente,
+dirigimos as nossas vidas.
+
+. . .
+
+
+
+- Neste exato momento, uma
+verdadeira enxurrada de dados são gerados por dia,
+i.e. aproximadamente 2.5 quintilhões de bytes^[2500000000000000000 Bytes $\approx$ 2.5 Exabytes ], e estes dados estão sendo utilizados para nortear
+indivíduos, empresas e governos,
+e geralmente essa quantidade é dobranda a cada dois
+anos.
+
+. . .
+
+
+- Toda vez que fazemos uma
+compra, uma ligação ou
+interagimos nas redes sociais,
+estamos produzindo esses dados.
+
+. . .
+
+- E com a recente conectividade em
+objetos, tal como relógios, carros e até
+geladeiras, as informações capturadas
+se tornam massivas e podem ser
+cruzadas para criar roadmaps cada vez
+mais elaborados, apontando e, até
+prevendo, o comportamento de
+empresas e clientes.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<div style="text-align: center;">
+![](images/1_b-X6jefi9190lQaH33KkDA.webp){.relative width=500}
+</div>
+
+----
+
+## Big Data
+
+<hr/>
+
+
+<h3 style="text-align:center";>Mas afinal, qual a definição de Big Data?</h3>
+
+. . .
+
+<div class="contrib">
+
+Big Data pode ser entendido como uma coleção de conjuntos
+de dados, grandes e complexos, que
+não podem ser processados por
+bancos de dados ou aplicações de
+processamento tradicionais.
+</div>
+
+. . .
+
+<br/>
+
+- O Google estima que a humanidade criou nos últimos 5
+anos, o equivalente a 300 Exabytes de dados ou seja:
+300.000.000.000.000.000.000 bytes de dados.
+
+. . .
+
+
+- Podemos definir o conceito de Big Data como sendo conjuntos de
+dados extremamente amplos e que, por este motivo, necessitam de
+ferramentas especialmente preparadas para lidar com grandes
+volumes, de forma que toda e qualquer informação nestes meios possa
+ser encontrada, analisada e aproveitada em tempo hábil.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+- Muitos dos dados gerados, possuem um tempo de vida curto e se não analisados,
+perdem a utilidade.
+
+<br/>
+
+.  .  .
+
+- Dados são transformados em informação,
+que precisa ser colocada em contexto
+para que possa fazer sentido.
+
+<br/>
+
+. .  .
+
+- É caro integrar grandes volumes de dados
+não-estruturados, pois vai exigir muito poder computacional
+consequentemente máquinas mais poderosas e mais caras.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+. .  .
+
+
+Trabalhar com Big Data exige alguns desafios:
+
+
+. .  .
+
+
+- Encontrar profissionais habilitados em Big Data.
+
+
+. .  .
+
+
+- Compreender as plataformas e ferramentas para
+Big Data.
+
+
+. .  .
+
+
+- Coletar, armazenar e analisar dados de diferentes
+fontes, em diferentes formatos e gerados em
+diferentes velocidades.
+
+
+. .  .
+
+
+- Migrar do sistema tradicional de coleta e
+armazenamento de dados, para uma estrutura de
+Big Data.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+O Big Data são caracterizados por 4 V's^[Algumas definições incluem o *Valor* como 5 V.], que são:
+
+<div style="text-align: center;">
+![](images/4v.png){.relative width=900}
+</div>
+
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+<h3>Volume</h3>
+
+- O volume refere-se à quantidade de dados que são gerados, armazenados e processados.
+
+<br/>
+
+
+<h3>Velocidade</h3>
+
+- A velocidade refere-se à rapidez com que os dados são gerados, armazenados e processados.
+
+
+::: 
+
+::: {.column width="10%"}
+
+::: 
+
+::: {.column width="45%"}
+
+<h3>Variedade</h3>
+
+- A variedade refere-se aos diferentes tipos de dados que são gerados, armazenados e processados.
+
+<!-- Como os dados estruturados são dados que são organizados em tabelas e são fáceis de serem processados e os dados não-estruturados são dados que não possuem uma estrutura definida e são difíceis de serem processados. -->
+
+
+<br/>
+
+
+<h3>Veracidade</h3>
+
+- A veracidade refere-se à qualidade dos dados que são gerados, armazenados e processados.
+
+
+:::
+
+:::: 
+
+
+
+----
+
+
+## Big Data
+
+<hr/>
+
+<div style="text-align: center;">
+![](images/4v3.png){.relative width=1200}
+</div>
+
+
+----
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<hr/>
+<h1 style="text-align:center;">Apache Spark</h1>
+<hr/>
+
+
+----
+
+## Apache Spark
+
+<hr/>
+
+
+:::: {.columns}
+
+::: {.column width="25%"}
+
+<div  style="text-align:right;">
+![](images/spark.webp){.relative width=200}
+</div>
+
+:::
+::: {.column width="40%"}
+
+<div style="text-align:left; margin-top:70px;">
+<https://spark.apache.org/>
+</div>
+
+:::
+::::
+
+
+- O Apache Spark é um framework de computação distribuída de código aberto, que fornece uma interface de programação unificada para processamento de dados em larga escala.
+
+- O Spark foi desenvolvido para ser rápido, fácil de usar e oferecer suporte a uma ampla variedade de aplicativos de processamento de dados de forma eficiente e escalável.
+
+- O Spark é amplamente utilizado em empresas de tecnologia, finanças, saúde, varejo e outras indústrias para processar grandes volumes de dados e executar análises em tempo real.
+
+- Pode ser usado com linguagens **Python, R, Scala e Java** e oferece suporte a bibliotecas para diversas tarefas, desde **consultas SQL** até **processamento de streaming** e **aprendizado de máquina**.
+
+
+----
+
+## Apache Spark
+
+<hr/>
+
+O Apache Spark oferece basicamente
+3 principais benefícios:
+
+1. **Facilidade de uso** – é possível desenvolver
+API’s de alto nível em Java, Scala, Python e R,
+que permitem focar apenas no conteúdo a ser
+computado, sem se preocupar com
+configurações de baixo nível e extremamente
+técnicas.
+
+2. **Velocidade** – Spark é veloz, permitindo uso
+iterativo e processamento rápido de
+algoritmos complexos. Velocidade é uma
+característica especialmente importante no
+processamento de grandes conjuntos de dados
+e pode fazer a diferença entre analisar os
+dados de forma interativa ou ficar aguardando
+vários minutos pelo fim de cada
+processamento. Com Spark, o processamento
+é feito em memória.
+
+3. **Uso geral** – Spark permite a utilização de
+diferentes tipos de computação, como
+processamento de linguagem SQL (SQL Spark),
+processamento
+de
+texto,
+Machine
+Learning (MLlib) e processamento de grafos
+(GraphX). Estas características fazem do Spark
+uma excelente opção para projetos de Big
+Data.
+Além de **Bibliotecas Externas (Pacotes de Terceiros)** que estendem a
+funcionalidade do Spark,
+e podem ser encontradas em <https://spark-packages.org/>.
+
+----
+
+## Apache Spark
+
+<hr/>
+
+<br/>
+
+
+As APIs de linguagem do Spark permitem que você escreva código Spark usando várias linguagens de programação. Os conceitos centrais do Spark são traduzidos para o código Spark que roda no cluster.
+
+. . .
+
+-   **Scala:** Linguagem "nativa" do Spark, oferece a API mais direta.
+-   **Java:** Suporte completo, permitindo escrever código Spark em Java.
+-   **Python (PySpark):** API robusta que permite a manipulação de dados em larga escala.
+-   **R (SparkR e sparklyr):** Duas bibliotecas que fornecem interfaces familiares de R para o Spark.
+-   **SQL:** Suporta um subconjunto do padrão ANSI SQL 2003, permitindo que analistas executem consultas SQL diretamente.
+
+
+----
+
+## Apache Spark
+<h4> Relação entre SparkSession e APIs de Linguagem</h4>
+<hr/>
+
+<br/>
+
+
+::: {.r-stack}
+![](images/spark_language_apis.png){width=80% height=80%}
+
+<!-- *Esta imagem demonstra como a SparkSession serve como ponto de entrada e a interface para as diferentes linguagens.* -->
+
+:::
+
+----
+
+## Apache Spark
+<h4>O Ponto de Entrada: SparkSession</h4>
+
+<hr/>
+
+A **SparkSession** é o ponto de entrada para qualquer aplicação Spark. É através dela que você controla a aplicação e suas manipulações no cluster.
+
+. . .
+
+-   Em modos interativos (como consoles), a SparkSession é criada implicitamente.
+-   Em aplicações *standalone*, você deve criar o objeto `SparkSession` manualmente.
+
+. . .
+
+**Exemplo (Scala):**
+
+```
+import org.apache.spark.sql.SparkSession
+val spark = SparkSession.builder()
+  .appName("MeuAppSpark")
+  .config("spark.sql.warehouse.dir", "/user/hive/warehouse")
+  .getOrCreate()
+```
+
+. . .
+
+Exemplo (Python):
+
+```
+from pyspark.sql import SparkSession
+spark = SparkSession.builder\
+  .master("local")\
+  .appName("ContadorDePalavras")\
+  .config("spark.some.config.option", "some-value")\
+  .getOrCreate()
+``` 
+
+----
+
+## Apache Spark
+<h4>DataFrames: Distribuído vs. Máquina Única</h4>
+
+<hr/>
+
+
+::: {.r-stack}
+
+![](images/dataframe_distributed.png)
+
+:::
+
+
+
+----
+
+## Apache Spark
+
+<h4>DataFrames vs. Datasets vs. RDDs</h4>
+
+<hr/>
+
+
+- **DataFrames:** Coleções tabelares distribuídas, otimizadas internamente pelo Spark. Disponíveis em todas as linguagens (Scala, Java, Python, R). São Datasets de tipo Row.
+
+. . .
+
+- **Datasets:** Coleções distribuídas type-safe, onde você pode atribuir uma classe Java/Scala aos registros. A verificação de tipos ocorre em tempo de compilação. Disponíveis apenas em Scala e Java.
+
+. . .
+
+- **RDDs (Resilient Distributed Datasets):** Abstração de baixo nível. Coleções imutáveis e distribuídas de objetos Java, Scala ou Python. Oferecem controle máximo, mas exigem mais esforço manual e menos otimizações automáticas.
+
+. . .
+
+> Recomendação: Priorize DataFrames/Datasets sempre que possível, pois o Spark otimiza melhor as operações com essas APIs. RDDs são para controle mais granular, especialmente para distribuição física de dados ou código legado.
+
+
+----
+
+## Apache Spark
+<h4>Avaliação Preguiçosa (Lazy Evaluation)</h4>
+
+<hr/>
+<br/>
+
+
+- A avaliação preguiçosa significa que o Spark espera até o último momento possível
+para executar as instruções.
+
+<br/>
+
+
+. . .
+
+- Ao invés de modificar os dados imediatamente,
+você constrói um plano de transformações que deseja aplicar aos seus dados de origem.
+
+<br/>
+
+
+**Benefícios:** O Spark pode otimizar todo o fluxo de dados de ponta a ponta.
+
+<!-- Exemplo: Predicated Pushdown: Se um filtro for especificado no final de um job Spark grande,
+o Spark pode otimizá-lo para acessar apenas os registros necessários na fonte de dados,
+empurrando o filtro para baixo. -->
+
+
+----
+
+## Apache Spark
+<h4>*Ações:* Acionando a execução</h4>
+
+<hr/>
+
+
+- As transformações permitem construir o plano lógico de manipulação de dados.
+Para acionar a execução, você executa uma ação.
+
+. . .
+
+- Uma ação instrui o Spark a computar um resultado a partir de uma série de transformações.
+
+- *Exemplo mais simples:* `count()`
+    - retorna o número total de registros no DataFrame.
+
+. . .
+
+**Tipos de Ações:**
+
+- Visualizar dados no console: `show()`, `printSchema()`.
+
+- Coletar dados para objetos nativos: `collect()`, `take()`.
+
+- Escrever dados para fontes de saída: `write.format().save()`.
+
+
+----
+
+## Apache Spark
+
+<hr/>
+
+<br/>
+
+
+<h3>Parquet</h3>
+
+- O Apache Parquet é um formato de arquivo de código aberto para armazenar dados em colunas.
+
+. . .
+
+- Ele é projetado para ser eficiente em termos de espaço e velocidade de leitura/escrita.
+
+. . .
+
+- O Parquet é especialmente útil para consultas analíticas em que você normalmente lê apenas algumas colunas de um grande conjunto de dados.
+
+. . .
+
+- O Parquet é amplamente utilizado em sistemas de Big Data, como o Apache Hadoop e o Apache Spark.
+
+. . .
+
+- Ele armazena grande volume de dados em disco, de forma compacta e eficiente, e permite a leitura de dados de forma rápida e eficiente.
+
+
+----
+
+## Apache Spark
+<h4>Spark UI: Monitoramento Visual</h4>
+
+<hr/>
+
+
+- A Spark UI é uma ferramenta gráfica incluída no Spark para monitorar o progresso dos jobs.
+
+. . .
+
+- *Acesso:* Disponível na porta 4040 (http://localhost:4040 em modo local).
+
+- *Informações:* Exibe detalhes sobre o estado dos jobs Spark, ambiente e estado do cluster.
+
+- *Utilidade:* Essencial para tuning de desempenho e depuração de aplicações.
+
+. . .
+
+*Exemplo:* Visão Geral de um Job no Spark UI
+
+![](images/spark_ui_job.png){.relative width=60%}
+
+
+---
+
+## Apache Spark
+<h4>Spark UI: Detalhes do Job, Stages e Tasks</h4>
+
+<hr/>
+
+
+- Um Job Spark representa um conjunto de transformações acionadas por uma ação individual.
+
+- Os Jobs são divididos em Stages (fases). O número de stages depende das operações de shuffle necessárias.
+
+- Cada Stage consiste em Tasks (tarefas). Cada tarefa corresponde a um bloco de dados e um conjunto de transformações a serem executadas por um executor.
+
+. . .
+
+**Monitore:**
+
+- Jobs Tab: Visão geral dos jobs Spark.
+
+- Stages Tab: Detalhes de cada stage e suas tarefas.
+
+- Storage Tab: Informações sobre RDDs/DataFrames em cache.
+
+- Environment Tab: Configurações e propriedades do Spark.
+
+- SQL Tab: Planos de consulta das APIs estruturadas.
+
+- Executors Tab: Informações detalhadas sobre cada executor.
+
+
+----
+
+## Apache Spark
+
+<hr/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h3 style="text-align:center">Vamos usar o Spark no python e R!</h3>
+
+
+-------
+
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
+<h3 style="text-align:center">Análise Exploratória com SPARK + R</h3>
+<hr/>
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+**Preparando o ambiente para utilizar o Sparklyr**
+
+- O Apache Spark depende de outros sistemas, portanto, antes do Spark é preciso instalar as dependências. Primeiro, deve-se instalar o java
+
+
+```{R, echo=T, eval=F}
+install.packages("sparklyr")
+install.packages("dplyr")
+install.packages("e1071")
+install.packages("ggplot2")
+# Para utilização no Google Colab
+#remotes::install_github("GabeChurch/sparkedatools", upgrade = "never")
+```
+
+. . .
+
+
+Lendo as bibliotecas necessárias
+
+```{R, echo=T, eval=T, warning=F, message=F}
+library(sparklyr)
+library(dplyr)
+#' ---
+library(e1071) # Para Skewness e Kurtosis
+library(ggplot2)
+#' ---
+# Para utilização no Google Colab
+#library(sparkedatools)
+```
+
+
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Indicando o caminho do Spark instalado na máquina
+
+```{R, echo=T, eval=T}
+# Definindo o caminho do Spark
+
+Sys.setenv(SPARK_HOME="/home/jodavid/spark-3.5.7-bin-hadoop3")
+```
+
+. . .
+
+<br/>
+
+- Criando o ambiente Spark
+
+```{R, echo=T, eval=T}
+spark_conn <- spark_connect(master = "local",
+              config=list(spark.sql.warehouse.dir=Sys.getenv("SPARK_HOME")))
+```
+
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Lendo os dados `parquet` com Spark
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Lendo arquivos parquet
+#' -----------------------
+dados <- spark_read_parquet(spark_conn,
+          name = "../dados/base_e-commerce_parquet/database_compras_parquet.parquet" )
+```
+
+. . .
+
+<br/>
+
+- Visualizando a quantidade de DataFrames carregados no Spark
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Lista de data.frames existentes no Spark
+#' -----------------------
+src_tbls(spark_conn)
+```
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Verificando as primeiras linhas do DataFrame
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Visualizando as primeiras linhas do DataFrame
+#' -----------------------
+dados |>
+  head(5) |>
+  show()
+```
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+<br/>
+
+- Verificando as quantidades de linhas e colunas da base de dados
+
+<br/>
+
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Verificando número de linhas e colunas
+#' -----------------------
+sdf_dim(dados)
+sdf_nrow(dados)
+sdf_ncol(dados)
+
+```
+
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+<br/>
+
+- Verificando os nomes das colunas
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Verificando os nomes das colunas
+#' -----------------------
+colnames(dados)
+```
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+<br/>
+
+- Verificando o esquema (estrutura) do DataFrame
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Verificando o esquema (estrutura) do DataFrame
+#' -----------------------
+sdf_schema(dados)
+```
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Resumo estatístico do DataFrame
+
+```{R, echo=T, eval=T, result='asis'}
+#' ------------------------------------
+#' Análise Descritiva  de algumas variáveis
+#' -----------------
+colunas_selecionadas <- c('VrVendaLiquida','VrDescontoTotal','VrFreteCliente','QtItem')
+#' ------
+dados |>
+  select(colunas_selecionadas) |>
+    sdf_describe()
+```
+
+
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Gerando um histograma
+
+```{R, echo=T, eval=T}
+#' -----------------------
+#' Histograma da variável VrVendaLiquida
+#' -----------------------
+dados |>
+  select(VrVendaLiquida) |>
+  sdf_collect() |>
+  ggplot(aes(x=VrVendaLiquida)) +
+    geom_histogram(binwidth = 50, fill="blue", color="black", alpha=0.7) +
+    labs(title="Histograma de VrVendaLiquida",
+         x="VrVendaLiquida",
+         y="Frequência") +
+    theme_minimal()
+```
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Fazendo um agrupamento e gráfico de barras
+
+```{R, echo=T, eval=T}
+#' ------------------------------------
+#' 3.3 Fazendo um agrupamento e gráfico de barras
+#' ------------------------------------
+total_de_linhas <- sdf_dim(dados)[1]
+#' ----------
+result <-
+  dados |>
+    select(c(DsCanalVenda,VrVendaLiquida)) |>
+    group_by(DsCanalVenda) |>
+    summarise_all(
+      list(n = ~ n(),
+           mean = ~ mean(.), min = ~ min(.),
+           max = ~ max(.), percent = ~ n() / total_de_linhas
+           )
+      )
+
+print(result)
+```
+
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Visualizando o gráfico de barras
+
+```{R, echo=T, eval=T}
+#' ----------
+result |>
+  ggplot(aes(x = DsCanalVenda, y = percent)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Proporção de Vendas por Canal de Venda",
+       x = "Canal de Venda",
+       y = "Proporção de Vendas")
+```
+
+
+-------
+
+## Apache Spark
+Análise Exploratória com Spark e R
+<hr/>
+
+- Fazendo uma correlação entre variáveis
+
+```{R, echo=T, eval=T}
+#' ------------------------------------
+# Forma 1
+features <- c('VrVendaLiquida','VrDescontoTotal','VrFreteCliente','QtItem') #selecionando as colunas
+ml_corr(dados, columns = features, method = "pearson") #calculando a correlação
+```
+
+. . .
+
+```{R, echo=T, eval=T}
+#' ------------------------------------
+# Forma 2
+dados |>
+  select(all_of(features)) |>
+  ml_corr(method = "pearson")
+```
+
+
+
+-------
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<hr/>
+<h1 style="text-align:center;">Mineração de Padrões Frequentes</h1>
+<h3 style="text-align:center;">O método FP-Growth</h3>
+<hr/>
+
+---
+
+## Por que minerar padrões?
+
+<hr/>
+
+<br/>
+
+Em grandes volumes de dados (Big Data), uma importante tarefa é encontrar relacionamentos ocultos entre itens.
+
+<br/>
+Alguns exemplos clássicos incluem:
+
+*   **Análise de Cesta de Compras:** "Clientes que compram pão também compram leite?"
+
+. . .
+
+*   **Navegação Web:** "Quais páginas são frequentemente acessadas juntas em uma mesma sessão?"
+
+. . .
+
+*   **Bioinformática:** "Quais combinações de genes estão ativas simultaneamente?"
+
+. . .
+
+Para isso, utilizamos técnicas de **Regras de Associação**.
+
+---
+
+## Apriori: O Algoritmo Pioneiro
+
+<hr/>
+<br/>
+
+*   O Apriori foi um dos primeiros algoritmos para mineração de regras de associação.
+
+. . .
+
+*   Ele funciona identificando conjuntos de itens frequentes e, em seguida, derivando regras a partir desses conjuntos.
+
+. . .
+
+*   No entanto, o Apriori tem algumas limitações, especialmente quando se trata de grandes conjuntos de dados. Ele requer múltiplas varreduras do banco de dados, o que pode ser demorado.
+
+
+. . .
+
+*   **O Gargalo:** Ele precisa escanear o banco de dados muitas vezes.
+*   Se temos 1 milhão de itens, o número de candidatos potenciais é astronômico ($2^{1000000} - 1$).
+
+<!-- . . .
+
+> Em contextos de Big Data com Spark, escanear o disco repetidamente é extremamente custoso. Precisamos de algo melhor. -->
+
+
+---
+
+## FPGrowth
+<h4>Uma Abordagem Mais Eficiente</h4>
+
+<hr/>
+<br/>
+
+*   Para lidar com as limitações do Apriori, foi desenvolvido o FPGrowth (Frequent Pattern Growth).
+
+. . .
+
+*   O FPGrowth utiliza uma estrutura de dados chamada FP-Tree (Frequent Pattern Tree) para compactar o banco de dados de transações.
+
+. . .
+
+*   Essa estrutura permite que o algoritmo encontre conjuntos de itens frequentes sem a necessidade de gerar candidatos explicitamente, tornando-o mais rápido e eficiente.
+
+----
+
+## O que é o FPGrowth?
+<hr/>
+<br/>
+
+
+*   **Algoritmo de mineração de regras de associação** que descobre padrões frequentes em grandes conjuntos de dados.
+
+<br/>
+
+*   **Alternativa eficiente ao Apriori:** Evita a geração de candidatos, usando uma estrutura de árvore para compactar o banco de dados.
+
+<br/>
+
+*   **Ideal para Big Data:** Escala bem com grandes volumes de dados e é adequado para implementação em plataformas distribuídas como o Spark.
+
+---
+
+## Como funciona o FPGrowth
+<hr/>
+<br/>
+
+*   **FP-Tree (Frequent Pattern Tree):** Árvore que representa as transações de forma compacta, mantendo a frequência dos itens.
+*   **Construção da FP-Tree:**
+    *   Escanear o banco de dados para encontrar a frequência de cada item.
+    *   Ordenar os itens em ordem decrescente de frequência.
+    *   Criar a FP-Tree inserindo as transações uma a uma, usando a ordem dos itens.
+*   **Mineração da FP-Tree:**
+    *   Começar com os itens menos frequentes na árvore.
+    *   Construir uma árvore condicional para cada item.
+    *   Encontrar os conjuntos de itens frequentes recursivamente nessas árvores condicionais.
+
+---
+
+
+## Conceitos Fundamentais
+
+<hr/>
+<br/>
+
+Antes de entrar no FP-Growth, precisamos entender as métricas que guiam esses algoritmos:
+
+<br/>
+
+::: {.columns}
+::: {.column width="33%"}
+#### Suporte (Support)
+
+<div style="font-size: 12pt;">
+A frequência com que um conjunto de itens aparece na base de dados.
+
+$$Support(A \cup B) = \frac{N(A \cup B)}{N_{total}}$$
+</div>
+
+:::
+
+::: {.column width="33%"}
+#### Confiança (Confidence)
+
+<div style="font-size: 12pt;">
+Dada a compra de A, qual a probabilidade de comprar B?
+
+$$Conf(A \rightarrow B) = \frac{Support(A \cup B)}{Support(A)}$$
+</div>
+
+:::
+
+::: {.column width="33%"}
+#### Lift
+
+<div style="font-size: 12pt;">
+A compra de A aumenta a chance de compra de B mais do que o esperado ao acaso?
+
+$$Lift > 1$$
+
+que indica dependência positiva.
+</div>
+
+:::
+:::
+
+<br/>
+
+em que $N(A \cup B)$ é o número de transações contendo ambos A e B, e $N_{total}$ é o número total de transações.
+
+
+
+
+---
+
+
+
+## Como a FP-Tree é construída?
+
+<hr/>
+<br/>
+
+**Scan 1: Contagem e Ordenação**
+
+*   Calcula a frequência de cada item.
+*   Descarta itens que não atingem o `minSupport`^[`minSupport` é um hiperparâmetro que determina o valor mínimo do Suporte.].
+*   Ordena os itens restantes por frequência decrescente (do mais comum para o menos comum).
+
+. . .
+
+**Scan 2: Construção da Árvore**
+
+*   Lê cada transação novamente.
+*   Filtra e ordena os itens da transação de acordo com a ordem do Scan 1.
+*   *Insere na árvore:* transações com prefixos iguais compartilham o mesmo caminho (nó), incrementando um contador.
+
+---
+
+## Exemplo Visual da Construção
+
+<hr/>
+
+Imagine as transações: `{Leite, Pão, Manteiga}`, `{Leite, Pão}`, `{Leite, Manteiga}`.
+Suponha que a ordem de frequência seja: Leite > Pão > Manteiga.
+
+<p>
+
+1.  **Inserir {Leite, Pão, Manteiga}:**
+    *   Raiz -> Leite (1) -> Pão (1) -> Manteiga (1)
+2.  **Inserir {Leite, Pão}:**
+    *   Raiz -> Leite (2) -> Pão (2)
+    *   *(Aproveita o caminho existente)*
+3.  **Inserir {Leite, Manteiga}:**
+    *   Raiz -> Leite (3) -> Manteiga (1)
+    *   *(Cria um novo ramo para Manteiga a partir de Leite)*
+
+. . .
+
+> A árvore resultante é menor que o dataset original!
+
+---
+
+## Teoria: Minerando a FP-Tree
+
+<hr/>
+<br/>
+
+Uma vez que a árvore está na memória (ou distribuída no Spark), o método extrai os padrões:
+
+1.  Começa pelos itens menos frequentes (base da árvore).
+2.  Para cada item, constrói sua **Base de Padrões Condicional**: todos os caminhos na árvore que levam até aquele item.
+3.  A partir dessa base, constrói uma nova "mini" FP-Tree condicional.
+4.  Se essa mini-árvore tem um único caminho, todas as combinações desse caminho são padrões frequentes.
+5.  O processo é recursivo.
+
+---
+
+## Hiperparâmetros FP-Growth no Spark
+
+<hr/>
+
+Ao utilizar FP-Growth no Spark (seja via R `sparklyr` ou Python `pyspark`), os principais hiperparâmetros que controlam o algoritmo são:
+
+
+**`minSupport` (Suporte Mínimo)**
+
+*   Define o limiar para um item ser considerado "frequente".
+*   *Exemplo:* `0.05` significa que o item deve aparecer em pelo menos 5% de todas as transações.
+*   **Impacto:** Valores muito baixos podem gerar árvores gigantescas e estourar a memória, mesmo no Spark. Valores muito altos podem não encontrar nenhum padrão.
+
+. . .
+
+**`minConfidence` (Confiança Mínima)**
+
+*   Usado após encontrar os conjuntos frequentes, para gerar as **regras de associação**.
+*   *Exemplo:* `0.6` significa que a regra só é válida se estiver correta 60% das vezes.
+
+<!-- ---
+
+## Outros Parâmetros Importantes no Spark
+
+<hr/>
+
+### `itemsCol`
+*   O nome da coluna no seu DataFrame que contém a lista de itens (deve ser do tipo array/lista).
+
+### `numPartitions`
+*   O número de partições usadas para distribuir o trabalho.
+*   No Spark, ajustar isso pode ser crucial para performance se o dataset for muito massivo, garantindo que a construção das árvores locais não sobrecarregue os executores.
+
+--- -->
+
+## Exemplo Prático:
+<h4>O que esperar da saída?</h4>
+<hr/>
+<br/>
+
+
+
+- Se rodarmos o FP-Growth em dados de um supermercado com `minSupport=0.1` e `minConfidence=0.5`.
+
+
+**Saída 1: Conjuntos Frequentes (Frequent Itemsets)**
+
+*(O que é comprado junto com frequência)*
+
+| items | freq |
+| :--- | :--- |
+| [macarrão, molho] | 150 |
+| [cerveja, amendoim] | 120 |
+| [leite, ovos, pão] | 85 |
+
+
+---
+
+## Exemplo Prático:
+<h4>O que esperar da saída?</h4>
+<hr/>
+<br/>
+
+
+
+**Saída 2: Regras de Associação (Association Rules)**
+
+*(Relações de causa provável)*
+
+| antecedent | consequent | confidence | lift |
+| :--- | :--- | :--- | :--- |
+| [amendoim] | [cerveja] | 0.75 | 1.8 |
+| [macarrão] | [molho] | 0.82 | 2.1 |
+
+
+
+-------
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
+<h3 style="text-align:center">Sistema de Recomendação com SPARK + python</h3>
+<hr/>
+
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+Criando o ambiente SPARK no python
+
+```{python eval=T, echo=T}
+# Importando a biblioteca os
+import os
+# Definindo a variável de ambiente do Spark
+os.environ["SPARK_HOME"] = "/home/jodavid/spark-3.5.7-bin-hadoop3"
+```
+
+Lendo as bibliotecas necessárias
+
+
+
+```{python eval=T, echo=T}
+# importando a findspark
+import findspark
+# iniciando o findspark
+findspark.init()
+```
+
+
+```{python eval=T, echo=T}
+# ------------------------------------
+# Importanto as bibliotecas
+# -----------------
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col
+#----------
+import numpy as np # Importanto Numpy
+import matplotlib.pyplot as plt # Importanto Numpy
+import seaborn as sns # Importando Seaborn
+# -----------------
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+- Iniciando Sessão do SPARK
+
+```{python eval=T, echo=T}
+# ------------------------------------
+# Iniciando uma sessão do Spark
+# ----
+# obs:
+# appName: Nome do app para a sessão
+# -----------------
+spark = SparkSession \
+        .builder \
+        .appName("Tutorial com SPARK - EPBEst2") \
+        .config("spark.some.config.option", "some-value") \
+        .getOrCreate()
+```
+
+. . .
+
+Lendo os dados `parquet` com Spark
+
+```{python eval=T, echo=T}
+# ------------------------------------
+# Ler dados com extensão PARQUET
+# -----------------
+dados = spark.read.parquet("../dados/base_e-commerce_parquet/database_compras_parquet.parquet")
+```
+
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+```{python, eval=T, echo=T}
+# ------------------------------------
+# Verificando a quantidade de linhas
+# -----------------
+dados.count()
+```
+
+. . .
+
+Verificando os tipos das variáveis
+
+```{python, eval=T, echo=T}
+# ------------------------------------
+# Verificando as colunas
+# -----------------
+dados.printSchema()
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+- Mostrando as primeiras linhas do DataFrame da variável `DsCanalVenda`
+
+```{python, eval=T, echo=T}
+# ------------------------------------
+# Mostrando as 20 linhas da variável
+# "DsCanalVenda"
+# -----------------
+dados.select("DsCanalVenda").show()
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+
+Mostrando as primeiras linhas do DataFrame
+
+```{python, eval=T, echo=T}
+dados.show(2,True)
+```
+
+. . .
+
+<br/>
+
+Ordenando os dados pela data, variável `DhPedido`
+
+```{python, eval=T, echo=T}
+# Ordenando pela data
+df_ordenado = dados.orderBy(col("DhPedido").desc())
+df_ordenado.show(2,True)
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+- Dividir a base em treino e predição
+
+```{python, eval=T, echo=T}
+# Separando o data.frame dados em dois data.frames
+
+# Separando as 100 linhas mais recentes
+dados_pred = df_ordenado.limit(100)
+
+# Criar DataFrame com o restante
+dados_treino = df_ordenado.subtract(dados_pred)  # remove as 100 linhas do df original
+
+dados_pred.show(5, True)
+```
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+Aplicando o **Market Basket Analysis usando PySpark**
+
+```{python, eval=T, echo=T}
+qtde_compras = dados_treino.groupBy("DsSingleId").count()
+qtde_compras.show(5)
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+**Implementação do FPGrowth**
+
+```{python eval=T, echo=T}
+from pyspark.sql import functions as f, SparkSession, Column
+from pyspark.sql.functions import collect_list, array_repeat, concat, col
+
+# Agrupar produtos por DsSingleId
+dados_compras_agg = dados_treino.groupBy("DsSingleId").agg(collect_list("DsItemSite").alias("compras"))
+```
+
+. . .
+
+<br/>
+
+```{python eval=T, echo=T}
+# Visualizando 3 linhas do data.frame
+dados_compras_agg.show(3, False)
+```
+
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+- Removendo valores nulos
+
+```{python eval=T, echo=T}
+# Removendo valores nulos
+df_aggregated = dados_compras_agg.select("DsSingleId", f.array_except("compras", f.array(f.lit(None))).alias("compras"))
+df_aggregated.show(3, False)
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+**Hiperparâmetros**
+
+Os hiperparâmetros usados no FPGrowth são suporte mínimo, confiança mínima e número de partições.
+
+* **minSupport** – O suporte mínimo de um item para que ele seja considerado em um conjunto frequente de itens.
+* **minConfidence** – A confiança mínima para gerar uma regra de associação a partir de um conjunto de itens.
+* **numPartitions** – O número de partições usadas para distribuir o trabalho. Isso é específico do Spark.
+
+O número padrão de partições é o número de partições do conjunto de dados de entrada.
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+
+```{python eval=T, echo=T}
+# Executando o FPGrowth e criando o modelo
+from pyspark.ml.fpm import FPGrowth
+
+fp = FPGrowth(minSupport=0.00005, minConfidence=0.0001, itemsCol='compras', predictionCol='prediction')
+
+model = fp.fit(df_aggregated)
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+Vendo um subconjunto das regras de itens frequentes.
+
+```{python eval=T, echo=T}
+# Veja um subconjunto do conjunto de itens frequentes
+model.freqItemsets.show(10, False)
+```
+
+. . .
+
+```{python eval=T, echo=T}
+# Use o filtro para visualizar apenas as regras de associação com a maior confiança.
+model.associationRules.filter(model.associationRules.confidence>0.15).show(20, False)
+```
+
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+Vamos criar uma recomendação com base nas regras de associação geradas
+
+
+```{python eval=T, echo=T}
+# Predict
+dados_pred_sel = dados_pred.select("DsSingleId", "DsItemSite")
+dados_pred_sel_compras = dados_pred_sel.withColumnRenamed("DsItemSite","compras")
+dados_pred_aggregated = dados_pred_sel_compras.groupBy("DsSingleId").agg(
+    f.collect_list("compras").alias("compras")
+)
+
+dados_pred_aggregated.show(20, True)
+```
+
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+
+```{python eval=T, echo=T}
+# Gerando as recomendações
+model.transform(dados_pred_aggregated).show(20, True)
+```
+
+-------
+
+##  {background-image="images/ppgest_ufpe.png" background-opacity="1" background-size="contain"}
+
+
+---
+
+<!-- ----
+
+## Referências
+
+<hr/>
+<br/>
+
+
+- Treveil, Mark, et al. Introducing MLOps. O'Reilly Media, 2020.
+
+
+- Sculley, David, et al. "Hidden technical debt in machine learning systems." Advances in neural information processing systems 28 (2015).
+
+
+- Kuhn, Max, and Julia Silge. Tidy modeling with R: A framework for modeling in the tidyverse. " O'Reilly Media, Inc.", 2022.
+
+
+- Wisniewski, Jakub, and Przemyslaw Biecek. "fairmodels: a Flexible Tool for Bias Detection, Visualization, and Mitigation in Binary Classification Models." R J. 14.1 (2022): 227-243.
+
+- vetiver - <https://github.com/rstudio/vetiver-r>
+
+
+
+------- -->
+
+<br/>
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+<h3 style="font-size:30pt">Contato:</h3>
+<p/>
+
+
+**e-mail**: <jodavid.ferreira@ufpe.br>
+
+**Site Pessoal**: <https://jodavid.github.io/>
+
+**Lattes**: [http://lattes.cnpq.br/4617170601890026](http://lattes.cnpq.br/4617170601890026)
+
+**LinkedIn**: [jodavidferreira](https://www.linkedin.com/in/jodavidferreira/)
+
+:::
+
+::: {.column width="40%"}
+
+![](images/castlab.png){.relative fig-align="center" width="200"}
+
+<div style="text-align:center; margin-top:-30px">
+Computational Agriculture Statistics Laboratory - UFPE
+</div>
+
+:::
+::::
+
+
+<br/> <br/>
+
+<hr/>
+
+<h1 style="text-align: center;">
+
+OBRIGADO!
+
+</h1>
+
+<hr/>
+
+::: {style="text-align: center"}
+Slide produzido com [quarto](https://quarto.org/)
+:::
