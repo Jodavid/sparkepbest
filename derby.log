@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Tue Oct 21 16:07:46 BRT 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-082b-9a77-000019768df0 
-on database directory /home/jodavid/Documents/UFPE/11_APRESENTACOES/2025/XIX_EMR-EPBEST/Tutorial_EPBEst/Dia_01_-_Explorando_R_e_Python_com_Spark_no_contexto_da_Estatistica/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
+Tue Oct 21 16:29:42 BRT 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-083f-af94-00001966b6c0 
+on database directory /home/jodavid/Documents/UFPE/11_APRESENTACOES/2025/XIX_EMR-EPBEST/Tutorial_EPBEst/Explorando_R_e_Python_com_Spark_no_contexto_da_Estatistica/metastore_db with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5ffd2b27 
 Loaded from file:/home/jodavid/spark-3.5.7-bin-hadoop3/jars/derby-10.14.2.0.jar
 java.vendor=Ubuntu
 java.runtime.version=11.0.28+6-post-Ubuntu-1ubuntu122.04.1
-user.dir=/home/jodavid/Documents/UFPE/11_APRESENTACOES/2025/XIX_EMR-EPBEST/Tutorial_EPBEst/Dia_01_-_Explorando_R_e_Python_com_Spark_no_contexto_da_Estatistica
+user.dir=/home/jodavid/Documents/UFPE/11_APRESENTACOES/2025/XIX_EMR-EPBEST/Tutorial_EPBEst/Explorando_R_e_Python_com_Spark_no_contexto_da_Estatistica
 os.name=Linux
 os.arch=amd64
 os.version=6.8.0-85-generic

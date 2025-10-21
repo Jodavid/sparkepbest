@@ -1,6 +1,6 @@
 ---
 title: "Explorando R e Python com Spark no contexto da Estatística"
-subtitle: "Dia 01 - 27.10.2025"
+subtitle: "27.10.2025 e 28.10.2025"
 author: "Prof. Dr. Jodavid Ferreira"
 institute: "UFPE"
 title-slide-attributes:
@@ -12,7 +12,7 @@ format:
     slide-number: c/t
     css: ["css/jodavid.css"]
     theme: default
-    footer: "Explorando R e Python com Spark no contexto da Estatística - [Jodavid Ferreira](https://jodavid.github.io/)"
+    footer: "<https://jodavid.github.io/sparkepbest/> - [Jodavid Ferreira](https://jodavid.github.io/)"
     logo: "images/logo.png"
     smaller: true
     incremental: false
@@ -2932,7 +2932,12 @@ Computational Agriculture Statistics Laboratory - UFPE
 ::::
 
 
-<br/> <br/>
+<br/>
+
+::: {style="text-align: center"}
+Link da apresentação: <https://jodavid.github.io/sparkepbest/>
+:::
+
 
 <hr/>
 
