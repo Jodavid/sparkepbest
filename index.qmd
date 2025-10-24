@@ -12,7 +12,7 @@ format:
     slide-number: c/t
     css: ["css/jodavid.css"]
     theme: default
-    footer: "<https://jodavid.github.io/sparkepbest/> - [Jodavid Ferreira](https://jodavid.github.io/)"
+    footer: "Explorando R e Python com Spark no contexto da Estatística - [Jodavid Ferreira](https://jodavid.github.io/)"
     logo: "images/logo.png"
     smaller: true
     incremental: false
@@ -24,27 +24,352 @@ editor:
     wrap: 72
 ---
 
+::: {style="display: flex; align-items: center;"}
+<div style="font-size:16pt;">
+![](images/jodavid.jpg){style="margin: 50px 0 0 0; width: 750px; height: auto;"}
+
+Professor Depto. de Estatística da UFPE
+</div>
+
+<div style="font-size:18pt; margin:0px 0 0 0px;">
+<h4 style="text-align: left"> Quem é o Dr. Jodavid Ferreira? </h4>
+* Graduação em Estatística pela UFPB - 2015;
+* Mestrado em Estatística pela UFPE - 2017;
+* Doutor em Estatística pela UFPE - 2021;
+* Pós-Doutorado em Modelos de Decisão e Saúde (UFPB) - 2024;
+
+
+<h4 style="text-align: left"> Experiências e Linhas de Pesquisa </h4>
+* Processamento de Imagens;
+* Distribuições matriciais de Probabilidade;
+* Distribuições de Probabilidade Fuzzy;
+* Machine Learning, Deep Learning;
+
+<h4 style="text-align: left"> Experiências Profissionais - 2021 | 2024 </h4>
+* HartB Group e ThinkAI Group (Startups com foco em Inteligência Artificial);
+* Certificado em IA pela **Huawei** e em Engenharia de dados pela **Google**;
+
+</div>
+:::
+  
+  
+  
+----
+
 
 ## Estrutura do Minicurso
 
 <hr/>
-<br/>
-
 
 **=> Dia 01 - 27.01.2025**:
 
+- Big Data;
 - Introdução ao R;
 - Introdução ao python;
-- O que é Spark e instalação do Spark com Google Colab;
-
-<br/>
+- Introdução ao Apache Spark;
 
 **=> Dia 02 - 28.01.2025:**
 
 - Análise Exploratória de Dados com PySpark;
 - Análise Exploratória de Dados com Sparklyr;
 - Aplicando FPGroup em PySpark com criação de funções;
-- Aplicando FPGroup em Sparklyr com criação de funções;
+- Aplicando FPGroup em Sparklyr com criação de funções^[Se houver tempo disponível. Mas disponibilizarei o material para estudo posterior.];
+
+-------
+
+## Big Data
+
+<hr/>
+
+- Estamos em um período de
+transformação no modo em
+que estudamos, ensinamos e, principalmente,
+dirigimos as nossas vidas.
+
+. . .
+
+
+
+- Neste exato momento, uma
+verdadeira enxurrada de dados são gerados por dia,
+i.e. aproximadamente 2.5 quintilhões de bytes^[2500000000000000000 Bytes $\approx$ 2.5 Exabytes ], e estes dados estão sendo utilizados para nortear
+indivíduos, empresas e governos,
+e geralmente essa quantidade é dobranda a cada dois
+anos.
+
+. . .
+
+
+- Toda vez que fazemos uma
+compra, uma ligação ou
+interagimos nas redes sociais,
+estamos produzindo esses dados.
+
+. . .
+
+- E com a recente conectividade em
+objetos, tal como relógios, carros e até
+geladeiras, as informações capturadas
+se tornam massivas e podem ser
+cruzadas para criar roadmaps cada vez
+mais elaborados, apontando e, até
+prevendo, o comportamento de
+empresas e clientes.
+
+
+----
+
+
+## Big Data
+<h4>Cenário Atual - Mundo</h4>
+
+<hr/>
+
+<br/> 
+
+* Atualmente, existem aproximadamente **50 bilhões** de dispositivos conectados à internet;
+
+* **7.4 bilhões** de pessoas vivendo em nosso planeta.
+
+* Essas conexões entre pessoas e dispositivos geram uma massa de dados estimada em **5 zettabytes**.
+
+
+Para se ter uma ideia do que isso significa, vamos entender rapidamente a estrutura de armazenamento de dados com exemplos que temos no cotidiano.
+
+![](images/predictive-analytics-computer-icons-data-analysis-business-intelligence-statistical-information-analysis-59d1882286ede637d0ff63e9ac65936c.png){.absolute bottom=0 right=50 width="300"}
+
+
+----
+
+## Big Data
+<h4>Cenário Atual - Mundo</h4>
+
+<hr/>
+
+![](images/1_b-X6jefi9190lQaH33KkDA.webp){.absolute bottom=80 right=0 width="500"}
+
+
+* bit (b)
+* byte (B) 
+* kilobyte (KB)
+* megabyte (MB)
+* gigabyte (GB) 
+* terabyte (TB)
+* petabyte (PB)
+* exabyte (EB)
+* zettabyte (ZB) 
+* 'yottabyte' (YB)
+
+Este último, equivale a 'todas as centrais de dados, discos rígidos, pendrives e servidores de todo o mundo'. 
+
+<br/> 
+
+
+----
+
+## Big Data
+Cenário Brasil - 2022
+
+<hr/>
+
+<br/> 
+
+No Brasil, aproximadamente, 71% da população brasileira está acessando a internet e 66% estão nas mídias sociais, como blogs, Facebook, X (oantigo Twitter), Instagram, SlideShare, Youtube, entre outros, realizando algum tipo de interação e assim trocando dados e informações.
+
+<br/> 
+
+![Uso digital no Brasil. Fonte: We are social.](images/1_nmIjRkimopB2YeFkitKMQA.webp){fig-align="center" width="400"}
+
+
+----
+
+## Big Data
+
+<hr/>
+
+
+<h3 style="text-align:center";>Mas afinal, qual a definição de Big Data?</h3>
+
+. . .
+
+<div class="contrib">
+
+Big Data pode ser entendido como uma coleção de conjuntos
+de dados, grandes e complexos, que
+não podem ser processados por
+bancos de dados ou aplicações de
+processamento tradicionais.
+</div>
+
+. . .
+
+<br/>
+
+- O Google estima que a humanidade criou nos últimos 5
+anos, o equivalente a 300 Exabytes de dados ou seja:
+300.000.000.000.000.000.000 bytes de dados.
+
+. . .
+
+
+- Podemos definir o conceito de Big Data como sendo conjuntos de
+dados extremamente amplos e que, por este motivo, necessitam de
+ferramentas especialmente preparadas para lidar com grandes
+volumes, de forma que toda e qualquer informação nestes meios possa
+ser encontrada, analisada e aproveitada em tempo hábil.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+- Muitos dos dados gerados, possuem um tempo de vida curto e se não analisados,
+perdem a utilidade.
+
+<br/>
+
+.  .  .
+
+- Dados são transformados em informação,
+que precisa ser colocada em contexto
+para que possa fazer sentido.
+
+<br/>
+
+. .  .
+
+- É caro integrar grandes volumes de dados
+não-estruturados, pois vai exigir muito poder computacional
+consequentemente máquinas mais poderosas e mais caras.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+
+![](images/48205193-mercado-pesquisa-e-analise-ilustracao-com-equipe-gestao-e-analytics-para-criando-dados-estatisticas-dentro-uma-plano-estilo-desenho-animado-fundo-vetor.jpg){.absolute bottom=400 right=50 width="400"}
+
+<br/>
+
+Trabalhar com Big Data exige alguns desafios:
+
+
+. .  .
+
+
+- Encontrar profissionais habilitados em Big Data.
+
+
+. .  .
+
+
+- Compreender as plataformas e ferramentas para
+Big Data.
+
+
+. .  .
+
+
+- Coletar, armazenar e analisar dados de diferentes
+fontes, em diferentes formatos e gerados em
+diferentes velocidades.
+
+
+. .  .
+
+
+- Migrar do sistema tradicional de coleta e
+armazenamento de dados, para uma estrutura de
+Big Data.
+
+
+----
+
+## Big Data
+
+<hr/>
+
+O Big Data são caracterizados por 4 V's^[Algumas definições incluem o *Valor* como 5 V.], que são:
+
+<div style="text-align: center;">
+![](images/4v.png){.relative width=900}
+</div>
+
+
+
+----
+
+## Big Data
+
+<hr/>
+
+<br/>
+
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+<h3>Volume</h3>
+
+- O volume refere-se à quantidade de dados que são gerados, armazenados e processados.
+
+<br/>
+
+
+<h3>Velocidade</h3>
+
+- A velocidade refere-se à rapidez com que os dados são gerados, armazenados e processados.
+
+
+::: 
+
+::: {.column width="10%"}
+
+::: 
+
+::: {.column width="45%"}
+
+<h3>Variedade</h3>
+
+- A variedade refere-se aos diferentes tipos de dados que são gerados, armazenados e processados.
+
+<!-- Como os dados estruturados são dados que são organizados em tabelas e são fáceis de serem processados e os dados não-estruturados são dados que não possuem uma estrutura definida e são difíceis de serem processados. -->
+
+
+<br/>
+
+
+<h3>Veracidade</h3>
+
+- A veracidade refere-se à qualidade dos dados que são gerados, armazenados e processados.
+
+
+:::
+
+:::: 
+
+
+
+----
+
+
+## Big Data
+
+<hr/>
+
+<div style="text-align: center;">
+![](images/4v3.png){.relative width=1200}
+</div>
 
 
 ----
@@ -57,7 +382,7 @@ editor:
 <br/>
 
 <hr/>
-<h1 style="text-align:center;">Introdução ao python</h1>
+<h1 style="text-align:center;">Introdução ao R</h1>
 <hr/>
 
 
@@ -1314,264 +1639,7 @@ print(word_set)
 <br/>
 
 <hr/>
-<h1 style="text-align:center;">Introdução ao SPARK</h1>
-<hr/>
-
-
-
--------
-
-## Big Data
-
-<hr/>
-
-<br/>
-
-- Estamos em um período de
-transformação no modo em
-que estudamos, ensinamos e, principalmente,
-dirigimos as nossas vidas.
-
-. . .
-
-
-
-- Neste exato momento, uma
-verdadeira enxurrada de dados são gerados por dia,
-i.e. aproximadamente 2.5 quintilhões de bytes^[2500000000000000000 Bytes $\approx$ 2.5 Exabytes ], e estes dados estão sendo utilizados para nortear
-indivíduos, empresas e governos,
-e geralmente essa quantidade é dobranda a cada dois
-anos.
-
-. . .
-
-
-- Toda vez que fazemos uma
-compra, uma ligação ou
-interagimos nas redes sociais,
-estamos produzindo esses dados.
-
-. . .
-
-- E com a recente conectividade em
-objetos, tal como relógios, carros e até
-geladeiras, as informações capturadas
-se tornam massivas e podem ser
-cruzadas para criar roadmaps cada vez
-mais elaborados, apontando e, até
-prevendo, o comportamento de
-empresas e clientes.
-
-
-----
-
-## Big Data
-
-<hr/>
-
-<div style="text-align: center;">
-![](images/1_b-X6jefi9190lQaH33KkDA.webp){.relative width=500}
-</div>
-
-----
-
-## Big Data
-
-<hr/>
-
-
-<h3 style="text-align:center";>Mas afinal, qual a definição de Big Data?</h3>
-
-. . .
-
-<div class="contrib">
-
-Big Data pode ser entendido como uma coleção de conjuntos
-de dados, grandes e complexos, que
-não podem ser processados por
-bancos de dados ou aplicações de
-processamento tradicionais.
-</div>
-
-. . .
-
-<br/>
-
-- O Google estima que a humanidade criou nos últimos 5
-anos, o equivalente a 300 Exabytes de dados ou seja:
-300.000.000.000.000.000.000 bytes de dados.
-
-. . .
-
-
-- Podemos definir o conceito de Big Data como sendo conjuntos de
-dados extremamente amplos e que, por este motivo, necessitam de
-ferramentas especialmente preparadas para lidar com grandes
-volumes, de forma que toda e qualquer informação nestes meios possa
-ser encontrada, analisada e aproveitada em tempo hábil.
-
-
-----
-
-## Big Data
-
-<hr/>
-
-<br/>
-
-- Muitos dos dados gerados, possuem um tempo de vida curto e se não analisados,
-perdem a utilidade.
-
-<br/>
-
-.  .  .
-
-- Dados são transformados em informação,
-que precisa ser colocada em contexto
-para que possa fazer sentido.
-
-<br/>
-
-. .  .
-
-- É caro integrar grandes volumes de dados
-não-estruturados, pois vai exigir muito poder computacional
-consequentemente máquinas mais poderosas e mais caras.
-
-
-----
-
-## Big Data
-
-<hr/>
-
-<br/>
-
-. .  .
-
-
-Trabalhar com Big Data exige alguns desafios:
-
-
-. .  .
-
-
-- Encontrar profissionais habilitados em Big Data.
-
-
-. .  .
-
-
-- Compreender as plataformas e ferramentas para
-Big Data.
-
-
-. .  .
-
-
-- Coletar, armazenar e analisar dados de diferentes
-fontes, em diferentes formatos e gerados em
-diferentes velocidades.
-
-
-. .  .
-
-
-- Migrar do sistema tradicional de coleta e
-armazenamento de dados, para uma estrutura de
-Big Data.
-
-
-----
-
-## Big Data
-
-<hr/>
-
-O Big Data são caracterizados por 4 V's^[Algumas definições incluem o *Valor* como 5 V.], que são:
-
-<div style="text-align: center;">
-![](images/4v.png){.relative width=900}
-</div>
-
-
-
-----
-
-## Big Data
-
-<hr/>
-
-<br/>
-
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-<h3>Volume</h3>
-
-- O volume refere-se à quantidade de dados que são gerados, armazenados e processados.
-
-<br/>
-
-
-<h3>Velocidade</h3>
-
-- A velocidade refere-se à rapidez com que os dados são gerados, armazenados e processados.
-
-
-::: 
-
-::: {.column width="10%"}
-
-::: 
-
-::: {.column width="45%"}
-
-<h3>Variedade</h3>
-
-- A variedade refere-se aos diferentes tipos de dados que são gerados, armazenados e processados.
-
-<!-- Como os dados estruturados são dados que são organizados em tabelas e são fáceis de serem processados e os dados não-estruturados são dados que não possuem uma estrutura definida e são difíceis de serem processados. -->
-
-
-<br/>
-
-
-<h3>Veracidade</h3>
-
-- A veracidade refere-se à qualidade dos dados que são gerados, armazenados e processados.
-
-
-:::
-
-:::: 
-
-
-
-----
-
-
-## Big Data
-
-<hr/>
-
-<div style="text-align: center;">
-![](images/4v3.png){.relative width=1200}
-</div>
-
-
-----
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-<hr/>
-<h1 style="text-align:center;">Apache Spark</h1>
+<h1 style="text-align:center;">Introdução ao Apache SPARK</h1>
 <hr/>
 
 
@@ -2020,7 +2088,7 @@ Análise Exploratória com Spark e R
 #' Lendo arquivos parquet
 #' -----------------------
 dados <- spark_read_parquet(spark_conn,
-          name = "../dados/base_e-commerce_parquet/database_compras_parquet.parquet" )
+          name = "../dados/base_e-commerce_parquet/database_compras_parquet_300k.parquet" )
 ```
 
 . . .
@@ -2631,7 +2699,7 @@ Lendo os dados `parquet` com Spark
 # ------------------------------------
 # Ler dados com extensão PARQUET
 # -----------------
-dados = spark.read.parquet("../dados/base_e-commerce_parquet/database_compras_parquet.parquet")
+dados = spark.read.parquet("../dados/base_e-commerce_parquet/database_compras_parquet_300k.parquet")
 ```
 
 
@@ -2792,9 +2860,7 @@ Os hiperparâmetros usados no FPGrowth são suporte mínimo, confiança mínima 
 
 * **minSupport** – O suporte mínimo de um item para que ele seja considerado em um conjunto frequente de itens.
 * **minConfidence** – A confiança mínima para gerar uma regra de associação a partir de um conjunto de itens.
-* **numPartitions** – O número de partições usadas para distribuir o trabalho. Isso é específico do Spark.
 
-O número padrão de partições é o número de partições do conjunto de dados de entrada.
 
 
 -------
@@ -2827,7 +2893,14 @@ Vendo um subconjunto das regras de itens frequentes.
 model.freqItemsets.show(10, False)
 ```
 
-. . .
+
+-------
+
+## Apache Spark
+Sistema de Recomendação com SPARK + python
+<hr/>
+<br/>
+
 
 ```{python eval=T, echo=T}
 # Use o filtro para visualizar apenas as regras de associação com a maior confiança.
@@ -2853,7 +2926,7 @@ dados_pred_aggregated = dados_pred_sel_compras.groupBy("DsSingleId").agg(
     f.collect_list("compras").alias("compras")
 )
 
-dados_pred_aggregated.show(20, True)
+dados_pred_aggregated.show(20, False)
 ```
 
 
@@ -2865,7 +2938,7 @@ Sistema de Recomendação com SPARK + python
 
 ```{python eval=T, echo=T}
 # Gerando as recomendações
-model.transform(dados_pred_aggregated).show(20, True)
+model.transform(dados_pred_aggregated).show(20, False)
 ```
 
 -------

@@ -6,6 +6,12 @@ code, pre {
 }
 */
 
+pre.output, pre.source, pre {
+overflow-x: auto;
+white-space: pre;
+}
+
+
 .backinicio{
     background-image: url("imagens/back.png");
     background-size: cover; 
