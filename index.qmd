@@ -117,6 +117,18 @@ prevendo, o comportamento de
 empresas e clientes.
 
 
+
+-------
+
+## Big Data
+
+<hr/>
+
+{{< video videos/yolo_v8.mp4 width="1000" >}}
+
+
+Fonte: <https://youtu.be/QOC6vgnWnYo?si=CuVFdJ2NAqW7fq63>
+
 ----
 
 
